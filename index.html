@@ -21,13 +21,13 @@
         if (typeof io !== 'undefined') {
             socket = io.connect(`https://cippop-socket.xyrus10.com`)
             socket.on("connect", () => {
-                console.log("socket connected")
+//                 console.log("socket connected")
                 socket.emit("connected");
             });
         }
 
         socket.on("hello", data => {
-            console.log(data)
+//             console.log(data)
             document.getElementById('counter').innerHTML = data
         })
 
