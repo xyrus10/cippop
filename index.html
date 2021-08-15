@@ -14,12 +14,12 @@
     <div id="diem"></div>
     <div class="ilang" id="mangap"></div>
 </body>
-<script src="http://cippop-socket.xyrus10.com/socket.io/socket.io.js"></script>
+<script src="https://cippop-socket.xyrus10.com/socket.io/socket.io.js"></script>
 <script>
     window.onload = function () {
 
         if (typeof io !== 'undefined') {
-            socket = io.connect(`http://cippop-socket.xyrus10.com`)
+            socket = io.connect(`https://cippop-socket.xyrus10.com`)
             socket.on("connect", () => {
                 console.log("socket connected")
                 socket.emit("connected");
