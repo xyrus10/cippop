@@ -5,36 +5,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/style.css">
     <title>cip pop</title>
 </head>
 
-<body>
-    <h1 id="counter">0</h1>
-    <div id="diem"></div>
-    <div class="ilang" id="mangap"></div>
+<body class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 mb-5">
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    Leaderboard
+                </div>
+                <div class="card-body">
+                    <ol id="playerList">
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm12 col-md-8 col-lg-8">
+            <h1 id="counter">0</h1>
+            <div id="diem"></div>
+            <div class="ilang" id="mangap"></div>
+        </div>
+    </div>
+    </div>
 </body>
-<script src="https://cippop-socket.xyrus10.com/socket.io/socket.io.js"></script>
+<script src="https://cipop-server.herokuapp.com/socket.io/socket.io.js"></script>
+<!-- <script src="http://localhost:6996/socket.io/socket.io.js"></script> -->
 <script>
     window.onload = function () {
 
         if (typeof io !== 'undefined') {
-            socket = io.connect(`https://cippop-socket.xyrus10.com`)
+            socket = io.connect(`https://cipop-server.herokuapp.com`)
+            // socket = io.connect(`http://localhost:6996`)
             socket.on("connect", () => {
-//                 console.log("socket connected")
-                socket.emit("connected");
+                console.log("socket connected")
             });
         }
 
-        socket.on("hello", data => {
-//             console.log(data)
+        function enterUsername() {
+            return prompt("Enter Username: ");
+        }
+
+        let username = enterUsername()
+        if (username != null) {
+            socket.emit("checkUsername", username);
+            // socket.emit("connected", username);
+        }
+
+        socket.on("checkUsernameResult", result => {
+            if (result == false) {
+                alert("Username already taken")
+                username = enterUsername();
+                socket.emit("checkUsername", username);
+            } else {
+                socket.emit("connected", username);
+            }
+        })
+
+        socket.on("cokotScore", data => {
             document.getElementById('counter').innerHTML = data
         })
 
+        socket.on("userUpdate", (data) => {
+//             console.log("user list update", data);
+            let playerList = ''
+            data.forEach(item => {
+                // console.log(item.score);
+                playerList += `
+                    <li> ${item.username} ( ${item.score} ) </li>
+                `
+            })
+            document.getElementById('playerList').innerHTML = playerList
+        })
     }
 
     window.onclick = function () {
-        var audio = new Audio('pop.mp3');
+        var audio = new Audio('./assets/pop.mp3');
         audio.play();
         document.getElementById('diem').classList.add('ilang')
         document.getElementById('mangap').classList.remove('ilang')
