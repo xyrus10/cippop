@@ -1,0 +1,68 @@
+body {
+    background-color: #32353B;
+    padding: 0;
+    padding-top: 20px
+}
+
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: sans-serif;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 70px;
+    margin: 0 auto;
+}
+
+#diem {
+    /* background-color: #fff; */
+    background-image: url('/assets/cip.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 90vh;
+}
+
+#mangap {
+    /* background-color: #fff; */
+    background-image: url('/assets/cip-mangap.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 90vh;
+}
+
+#playerList {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.ilang {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #32353B;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #59595a;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #737374;
+}
