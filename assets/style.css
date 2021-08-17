@@ -33,7 +33,7 @@ h1 {
 
 #mangap {
     /* background-color: #fff; */
-    background-image: url('/cippop/assets/cip-mangap.png');
+    background-image: url('./cippop/assets/cip-mangap.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
